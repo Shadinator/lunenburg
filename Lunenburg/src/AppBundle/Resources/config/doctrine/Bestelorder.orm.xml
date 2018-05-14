@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Bestelorder" table="bestelorder">
+    <indexes>
+      <index name="id_artikel" columns="id_artikel_FK"/>
+      <index name="id_leverancier" columns="id_leverancier_FK"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="aantal" type="integer" column="aantal" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idArtikelFk" target-entity="Artikel" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_artikel_FK" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idLeverancierFk" target-entity="Leverancier" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_leverancier_FK" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
